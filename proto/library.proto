@@ -70,7 +70,7 @@ service library {
 
   rpc DeleteUser (DeleteUserReq) returns (DeleteUserResp) {
     option (google.api.http) = {
-      post: "/api/library/user.Deleteuser"
+      post: "/api/library/user.DeleteUser"
       body: "*"
     };
   }

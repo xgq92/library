@@ -1024,7 +1024,7 @@ var (
 
 	pattern_Library_UpdateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "library", "user.UpdateUser"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Library_DeleteUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "library", "user.Deleteuser"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Library_DeleteUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "library", "user.DeleteUser"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Library_BorrowBook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "library", "borrow.BorrowBook"}, "", runtime.AssumeColonVerbOpt(true)))
 
