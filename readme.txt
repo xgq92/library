@@ -1,4 +1,4 @@
-任务- golan gin 实现图书的 管理系统 http server
+任务- golang grpc 实现图书的 管理系统 http server
 功能需求
 只实现 api 接口即可， 使用 接口测试工具 进行 测试
 1. 实现 book 增删改查， 只需包含， 名称， 数量， 图书编码（唯一）
