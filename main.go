@@ -17,10 +17,14 @@ import (
 )
 
 func main() {
-	// mysql
+	// init
 	data.DataInitIns.OnInit()
 	defer data.DataInitIns.OnClose()
+	// start
+	startServe()
+}
 
+func startServe() {
 	// Create a listener on TCP port
 	lis, err := net.Listen("tcp", ":8080")
 	if err != nil {
