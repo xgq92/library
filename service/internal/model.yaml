@@ -1,0 +1,62 @@
+# book信息
+BookInfo:
+    db: mysqlr
+    dbname: library
+    dbtable: book_info
+    fields:
+      - Id: int64
+        flags: [primary,autoinc]
+      - BookCode: string
+        flags: [unique]
+        comment: 图书编码
+      - BookName: string
+        flags: [index]
+        comment: 名称
+      - BookCounts: int32
+        flags: [index]
+        comment: 数量
+      - UpdateTime: int64
+        flags: [index]
+        comment: 更新时间
+      - UpdateBy: string
+        comment: 更新人
+
+# 用户信息
+UserInfo:
+    db: mysqlr
+    dbname: library
+    dbtable: user_info
+    fields:
+      - Id: int64
+        flags: [primary,autoinc]
+      - UserName: string
+        flags: [index]
+        comment: 用户名
+      - UpdateTime: int64
+        flags: [index]
+        comment: 更新时间
+      - UpdateBy: string
+        comment: 更新人
+
+# 用户借阅信息
+UserBorrowInfo:
+    db: mysqlr
+    dbname: library
+    dbtable: user_borrow_info
+    fields:
+      - Id: int64
+        flags: [primary,autoinc]
+      - UserId: int64
+        flags: [index]
+        comment: 用户id
+      - BookCode: string
+        flags: [index]
+        comment: 图书编码
+      - Status: int32
+        flags: [index]
+        comment: 借阅状态(1:借阅中,2:已还书)
+      - UpdateTime: int64
+        flags: [index]
+        comment: 更新时间
+      - UpdateBy: string
+        comment: 更新人

@@ -1,0 +1,253 @@
+
+syntax = "proto3"; // 指定proto版本
+package library;     // 指定默认包名
+
+import "google/api/annotations.proto";
+ 
+// 指定golang包名
+option go_package = "../grpc/library";
+ 
+//定义rpc服务
+service library {
+  // 定义函数
+  rpc SayHello (HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/api/library/example"
+      body: "*"
+    };
+  }
+
+  // book
+  rpc AddBook (AddBookReq) returns (AddBookResp) {
+    option (google.api.http) = {
+      post: "/api/library/book.AddBook"
+      body: "*"
+    };
+  }
+
+  rpc GetBooks (GetBooksReq) returns (GetBooksResp) {
+    option (google.api.http) = {
+      post: "/api/library/book.GetBooks"
+      body: "*"
+    };
+  }
+
+  rpc UpdateBook (UpdateBookReq) returns (UpdateBookResp) {
+    option (google.api.http) = {
+      post: "/api/library/book.UpdateBook"
+      body: "*"
+    };
+  }
+
+  rpc DeleteBook (DeleteBookReq) returns (DeleteBookResp) {
+    option (google.api.http) = {
+      post: "/api/library/book.DeleteBook"
+      body: "*"
+    };
+  }
+
+  // user
+  rpc AddUser (AddUserReq) returns (AddUserResp) {
+    option (google.api.http) = {
+      post: "/api/library/user.AddUser"
+      body: "*"
+    };
+  }
+
+  rpc GetUsers (GetUsersReq) returns (GetUsersResp) {
+    option (google.api.http) = {
+      post: "/api/library/user.GetUsers"
+      body: "*"
+    };
+  }
+
+  rpc UpdateUser (UpdateUserReq) returns (UpdateUserResp) {
+    option (google.api.http) = {
+      post: "/api/library/user.UpdateUser"
+      body: "*"
+    };
+  }
+
+  rpc DeleteUser (DeleteUserReq) returns (DeleteUserResp) {
+    option (google.api.http) = {
+      post: "/api/library/user.Deleteuser"
+      body: "*"
+    };
+  }
+
+  // borrow
+  rpc BorrowBook (BorrowBookReq) returns (BorrowBookResp) {
+    option (google.api.http) = {
+      post: "/api/library/borrow.BorrowBook"
+      body: "*"
+    };
+  }
+
+  rpc ReturnBook (ReturnBookReq) returns (ReturnBookResp) {
+    option (google.api.http) = {
+      post: "/api/library/borrow.ReturnBook"
+      body: "*"
+    };
+  }
+
+  rpc GetBorrowBooks (GetBorrowBooksReq) returns (GetBorrowBooksResp) {
+    option (google.api.http) = {
+      post: "/api/library/borrow.GetBorrowBooks"
+      body: "*"
+    };
+  }
+}
+ 
+message HelloRequest {
+  string name = 1;
+  string message = 2;
+}
+ 
+message HelloResponse{
+  string name = 1;
+  string message = 2;
+}
+
+message Result {
+  int32 code = 1;
+  string hint = 2;
+}
+
+// book
+message AddBookReq {
+  string name = 1; //书名
+  int32 counts = 2; //数量
+}
+ 
+message AddBookResp{
+  Result result = 1;
+}
+
+message GetBooksReq {
+  string code = 1; //图书编码
+  string name = 2; //书名
+  int32 offset = 100;
+  int32 limit = 101;
+}
+ 
+message GetBooksResp{
+  Result result = 1;
+  int32 totalCount = 2; // 数量
+  repeated BookList datas = 3; //图书列表数据
+}
+
+message BookList {
+  string bookCode = 1; //图书编码
+  string bookName = 2; //名称
+  int32 bookCounts = 3; //数量
+}
+
+message UpdateBookReq {
+  string bookCode = 1; //图书编码
+  string bookName = 2; //名称
+  int32 bookCounts = 3; //数量
+}
+ 
+message UpdateBookResp{
+  Result result = 1;
+}
+
+message DeleteBookReq {
+  string bookCode = 1; //图书编码
+}
+ 
+message DeleteBookResp{
+  Result result = 1;
+}
+
+// user
+message AddUserReq {
+  string name = 1; //用户名
+}
+ 
+message AddUserResp{
+  Result result = 1;
+}
+
+message GetUsersReq {
+  int64 userId = 1; //用户id
+  string name = 2; //用户名
+  int32 offset = 100;
+  int32 limit = 101;
+}
+ 
+message GetUsersResp{
+  Result result = 1;
+  int32 totalCount = 2; // 数量
+  repeated UserList datas = 3; //图书列表数据
+}
+
+message UserList {
+  int64 userId = 1; //用户id
+  string userName = 2; //用户名
+}
+
+message UpdateUserReq {
+  int64 userId = 1; //用户id名
+  string userName = 2; //用户名
+}
+ 
+message UpdateUserResp{
+  Result result = 1;
+}
+
+message DeleteUserReq {
+  int64 userId = 1; //用户id名
+}
+ 
+message DeleteUserResp{
+  Result result = 1;
+}
+
+// borrow
+message BorrowBookReq {
+  int64 userId = 1; //用户id名
+  string bookCode = 2; //图书编码
+}
+ 
+message BorrowBookResp{
+  Result result = 1;
+}
+
+message ReturnBookReq {
+  int64 userId = 1; //用户id名
+  string bookCode = 2; //图书编码
+}
+ 
+message ReturnBookResp{
+  Result result = 1;
+}
+
+message GetBorrowBooksReq {
+  int64 userId = 1; //用户id名
+  int32 offset = 100;
+  int32 limit = 101;
+}
+ 
+message GetBorrowBooksResp{
+  Result result = 1;
+  int32 totalCount = 2; // 数量
+  repeated BorrowList datas = 3; //用户借阅图书列表数据
+}
+
+message BorrowList {
+  int64 userId = 1; //用户id名
+  string bookCode = 2; //图书编码
+  string userName = 3; //用户名
+  string bookName = 4; //读书名称
+  Status status = 5;  //借阅状态
+}
+
+enum Status {
+  // 未知
+  Unknown = 0;
+  // 借阅中
+  Borrowing = 1;
+  // 已还书
+  BorrowReturn = 2;
+}
