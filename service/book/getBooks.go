@@ -18,10 +18,10 @@ func GetBooks(ctx context.Context, req *library.GetBooksReq) (*library.GetBooksR
 	rets := []internal.BookInfo{}
 	var count int32
 	// data.GetDb().Where(where, req.GetCode(), req.GetName()).Find(&rets).Count(&count)
-	data.GetDb().Where("book_counts <> 0").Where(where).Find(&rets).Count(&count)
+	data.GetDb().Where(where).Where("book_counts <> 0").Find(&rets).Count(&count)
 	if count != 0 {
 		ret := data.GetDb().Limit(req.GetLimit()).Offset(req.GetOffset()).
-			Where("book_counts <> 0").Where(where).Find(&rets)
+			Where(where).Where("book_counts <> 0").Find(&rets)
 		if ret.Error != nil {
 			logger.Error(`DeleteBook db.Delete error: %v`, ret.Error)
 			return nil, ret.Error
